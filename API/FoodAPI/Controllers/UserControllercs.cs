@@ -20,9 +20,15 @@ namespace FoodAPI.Controllers
         public async Task<List<UserRegistrationDetails>> GetUserDetails()
         {
             List<UserRegistrationDetails> UserRegistrationDetails = new List<UserRegistrationDetails>();
-
-            UserRegistrationDetails = (List<UserRegistrationDetails>)await _IUser.GetUserLoginDetail();
-            return UserRegistrationDetails;
+            try
+            {
+                UserRegistrationDetails = (List<UserRegistrationDetails>)await _IUser.GetUserLoginDetail();
+                return UserRegistrationDetails;
+            }
+            catch (Exception ex)
+            {
+                return new List<UserRegistrationDetails>();
+            }
         }
     }
 }
